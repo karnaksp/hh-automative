@@ -1,17 +1,19 @@
-"""Elemnts utils"""
+"""Backward-compatible element action helpers."""
+
+from __future__ import annotations
 
 
-def set_value_with_event(element, value, driver):
-    ACTION.move_to_element(element).click().perform()
-    driver.execute_script("arguments[0].value = '';", element)
+def set_value_with_event(element, value: str, driver) -> None:
     driver.execute_script(
         """
-        var setValue = Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype, 'value').set;
-        var element = arguments[0];
-        var value = arguments[1];
-        setValue.call(element, value);
-        var event = new Event('input', { bubbles: true });
-        element.dispatchEvent(event);
+        const element = arguments[0];
+        const value = arguments[1];
+        const setter = Object.getOwnPropertyDescriptor(
+            window.HTMLTextAreaElement.prototype,
+            "value"
+        ).set;
+        setter.call(element, value);
+        element.dispatchEvent(new Event("input", { bubbles: true }));
         """,
         element,
         value,

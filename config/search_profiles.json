@@ -1,0 +1,42 @@
+{
+  "data-engineer": {
+    "query": "data engineer",
+    "exclude": "data scientist, data science, scientist, ml engineer, machine learning, research engineer, ai engineer, analyst, аналитик, продуктовый аналитик, системный аналитик, бизнес-аналитик, bi analyst, data analyst, mlops, devops, sre, site reliability, observability, platform engineer, infrastructure engineer, operations project manager, project manager, product manager, cv, computer vision, nlp, qa, 1c, support, sales, recruiter, hr, java, react, ios, android",
+    "region": "global",
+    "min_salary": "",
+    "only_with_salary": false,
+    "advanced_search_url": ""
+  },
+  "data-engineer-ru": {
+    "query": "инженер данных",
+    "exclude": "data scientist, data science, scientist, ml engineer, machine learning, research engineer, ai engineer, analyst, аналитик, продуктовый аналитик, системный аналитик, бизнес-аналитик, bi analyst, data analyst, mlops, devops, sre, site reliability, observability, platform engineer, infrastructure engineer, operations project manager, project manager, product manager, cv, computer vision, nlp, qa, 1c, support, sales, recruiter, hr, java, react, ios, android",
+    "region": "global",
+    "min_salary": "",
+    "only_with_salary": false,
+    "advanced_search_url": ""
+  },
+  "data-engineer-dwh": {
+    "query": "dwh developer",
+    "exclude": "data scientist, data science, scientist, ml engineer, machine learning, research engineer, ai engineer, analyst, аналитик, продуктовый аналитик, системный аналитик, бизнес-аналитик, bi analyst, data analyst, mlops, devops, sre, site reliability, observability, platform engineer, infrastructure engineer, operations project manager, project manager, product manager, cv, computer vision, nlp, qa, 1c, support, sales, recruiter, hr, java, react, ios, android",
+    "region": "global",
+    "min_salary": "",
+    "only_with_salary": false,
+    "advanced_search_url": ""
+  },
+  "data-engineer-etl": {
+    "query": "etl developer",
+    "exclude": "data scientist, data science, scientist, ml engineer, machine learning, research engineer, ai engineer, analyst, аналитик, продуктовый аналитик, системный аналитик, бизнес-аналитик, bi analyst, data analyst, mlops, devops, sre, site reliability, observability, platform engineer, infrastructure engineer, operations project manager, project manager, product manager, cv, computer vision, nlp, qa, 1c, support, sales, recruiter, hr, java, react, ios, android",
+    "region": "global",
+    "min_salary": "",
+    "only_with_salary": false,
+    "advanced_search_url": ""
+  },
+  "data-engineer-platform": {
+    "query": "data platform engineer",
+    "exclude": "data scientist, data science, scientist, ml engineer, machine learning, research engineer, ai engineer, analyst, аналитик, продуктовый аналитик, системный аналитик, бизнес-аналитик, bi analyst, data analyst, mlops, devops, sre, site reliability, observability, platform engineer, infrastructure engineer, operations project manager, project manager, product manager, cv, computer vision, nlp, qa, 1c, support, sales, recruiter, hr, java, react, ios, android",
+    "region": "global",
+    "min_salary": "",
+    "only_with_salary": false,
+    "advanced_search_url": ""
+  }
+}

@@ -1,4 +1,4 @@
-"""Compatibility entrypoint for local runs."""
+"""Module entrypoint."""
 
 from hh_automative.cli import main
 

@@ -1,71 +1,21 @@
-"""Work with resume utils"""
+"""Backward-compatible resume helpers."""
+
+from __future__ import annotations
+
+from hh_automative.models import ActionResult, Status
+from hh_automative.resumes import choose_resume
 
 
-def choose_resume(job_title, driver):
-    try:
-        default_button = driver.find_element(
-            By.XPATH,
-            f"//input[@id='{dict_resume.RESUME_CODES[f'{dict_resume.DEFAULT_RESUME}']}']",
-        )
-        driver.execute_script(
-            "arguments[0].scrollIntoView();  arguments[0].click();", default_button
-        )
-        for resume, code in dict_resume.RESUME_CODES.items():
-            resume_button = driver.find_element(By.XPATH, f"//input[@id='{code}']")
-            driver.execute_script(
-                "arguments[0].scrollIntoView(); arguments[0].click();", resume_button
-            )
-            if resume.lower() in job_title.lower():
-                break
-    except NoSuchElementException as e:
-        print(f"Failed to choose resume: Element not found {e}")
-        print("\n")
+def fill_in_cover_letter(_message, _driver, _wait) -> ActionResult:
+    return ActionResult(Status.SKIPPED, "Use hh_automative.response.respond_to_vacancy instead.")
 
 
-def fill_in_cover_letter(message, driver, wait):
-    global COUNTER
-    scroll_to_bottom(driver)
-    try:
-        cover_letter_button = wait.until(
-            EC.element_to_be_clickable(
-                (By.XPATH, '//button[@data-qa="vacancy-response-letter-toggle"]')
-            )
-        )
-        driver.execute_script("arguments[0].click()", cover_letter_button)
-        cover_letter_text = wait.until(
-            EC.element_to_be_clickable(
-                (
-                    By.XPATH,
-                    '//form[@action="/applicant/vacancy_response/edit_ajax"]/textarea',
-                )
-            )
-        )
-        set_value_with_event(cover_letter_text, message, driver)
-        submit_button = wait.until(
-            EC.element_to_be_clickable(
-                (By.XPATH, '//button[@data-qa="vacancy-response-letter-submit"]')
-            )
-        )
-        driver.execute_script(
-            "arguments[0].scrollIntoView(); arguments[0].click()", submit_button
-        )
-        time.sleep(1)
-        try:
-            error = wait.until(
-                EC.presence_of_element_located(
-                    (By.XPATH, '//div[@class="bloko-translate-guard"]')
-                )
-            )
-            if error:
-                return Status.SUCCESS
-        except Exception:
-            pass
-        wait.until(
-            EC.presence_of_element_located(
-                (By.XPATH, '//div[@data-qa="vacancy-response-letter-informer"]')
-            )
-        )
-        COUNTER += 1
-        return Status.SUCCESS
-    except Exception:
-        return Status.FAILURE
+def check_cover_letter_popup(*_args, **_kwargs) -> ActionResult:
+    return ActionResult(Status.SKIPPED, "Deprecated compatibility helper.")
+
+
+def answer_questions(*_args, **_kwargs) -> ActionResult:
+    return ActionResult(Status.SKIPPED, "Question automation is not implemented.")
+
+
+__all__ = ["answer_questions", "check_cover_letter_popup", "choose_resume", "fill_in_cover_letter"]

@@ -1,2 +1,13 @@
 __pycache__
 .vscode
+.env
+.venv/
+auth/
+browser/
+data/
+logs/
+reports/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+*.pyc

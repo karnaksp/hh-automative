@@ -1,22 +1,21 @@
-"""Login utils"""
+"""Backward-compatible login helper."""
+
+from __future__ import annotations
+
+from hh_automative.auth import is_logged_in
 
 
-def navigate_and_check(probe_page, driver):
+def navigate_and_check(probe_page: str, driver) -> bool:
+    from selenium.webdriver.support.ui import WebDriverWait
+
+    from hh_automative.browser import BotContext
+    from hh_automative.settings import Settings
+
+    settings = Settings.load()
+    context = BotContext(
+        driver=driver,
+        wait=WebDriverWait(driver, settings.timeout_seconds),
+        settings=settings,
+    )
     driver.get(probe_page)
-    time.sleep(5)
-    if success(driver):
-        save_data_to_json(driver.get_cookies(), COOKIES_PATH)
-        save_data_to_json(
-            {
-                key: driver.execute_script(
-                    f"return window.localStorage.getItem('{key}');"
-                )
-                for key in driver.execute_script(
-                    "return Object.keys(window.localStorage);"
-                )
-            },
-            LOCAL_STORAGE_PATH,
-        )
-        return True
-    else:
-        return False
+    return is_logged_in(context)
