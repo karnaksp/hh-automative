@@ -46,9 +46,11 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install build tools
-        run: python -m pip install build
+        run: |
+          python -m pip install -U pip
+          python -m pip install build setuptools wheel
       - name: Build package
-        run: python -m build --no-isolation
+        run: python -m build
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
