@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Документация hh-automative: Selenium-автоматизация откликов hh.ru, аналитика, LLM-письма и локальная панель."
+    />
+    <title>hh-automative docs</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <nav class="topbar" aria-label="Основная навигация">
+        <a class="brand" href="#top" aria-label="hh-automative">
+          <span class="brand-mark">hh</span>
+          <span>automative</span>
+        </a>
+        <div class="nav-links">
+          <a href="#install">Установка</a>
+          <a href="#workflow">Сценарий</a>
+          <a href="#config">Конфигурация</a>
+          <a href="#analytics">Аналитика</a>
+          <a href="#llm">LLM</a>
+        </div>
+      </nav>
+
+      <section class="hero-grid" id="top">
+        <div class="hero-copy">
+          <p class="eyebrow">Selenium automation toolkit</p>
+          <h1>Контролируемые отклики на hh.ru с историей, диагностикой и локальной аналитикой.</h1>
+          <p class="lead">
+            Проект автоматизирует поиск вакансий, выбор резюме, подготовку писем и сохранение
+            технических следов запуска. По умолчанию безопасен для проверки: dry-run не отправляет
+            отклики.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#quickstart">Быстрый старт</a>
+            <a class="button ghost" href="https://github.com/karnaksp/hh-automative">GitHub</a>
+          </div>
+        </div>
+
+        <div class="terminal" aria-label="Пример запуска">
+          <div class="terminal-bar">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <pre><code>$ python -m hh_automative check-config
+OK config profiles loaded
+
+$ python -m hh_automative run \
+  --profile data-engineer \
+  --limit 10 \
+  --dry-run
+
+History: data/hh_automative.sqlite3
+Events:  data/hh_automative.duckdb</code></pre>
+        </div>
+      </section>
+    </header>
+
+    <main>
+      <section class="section intro-band" aria-label="Возможности">
+        <div class="feature">
+          <span class="feature-index">01</span>
+          <h2>Поиск вакансий</h2>
+          <p>Профили поиска описываются в JSON и позволяют держать запросы воспроизводимыми.</p>
+        </div>
+        <div class="feature">
+          <span class="feature-index">02</span>
+          <h2>Отклики</h2>
+          <p>Браузерный flow открывает вакансии, подбирает резюме и фиксирует результат.</p>
+        </div>
+        <div class="feature">
+          <span class="feature-index">03</span>
+          <h2>Диагностика</h2>
+          <p>При сбоях сохраняются скриншоты, HTML и структурированные события.</p>
+        </div>
+        <div class="feature">
+          <span class="feature-index">04</span>
+          <h2>Панель</h2>
+          <p>Streamlit-панель читает DuckDB и показывает запуски, ошибки и app logs.</p>
+        </div>
+      </section>
+
+      <section class="section split" id="quickstart">
+        <div>
+          <p class="eyebrow">Quickstart</p>
+          <h2>Минимальный запуск</h2>
+          <p>
+            Создайте виртуальное окружение, установите проект в editable-режиме и заполните локальный
+            `.env`. Секреты не должны попадать в репозиторий.
+          </p>
+        </div>
+        <pre class="code-block"><code>python -m venv .venv
+source .venv/bin/activate
+python -m pip install -e ".[dev]"
+cp .env.example .env</code></pre>
+      </section>
+
+      <section class="section" id="install">
+        <div class="section-heading">
+          <p class="eyebrow">Commands</p>
+          <h2>Основные команды</h2>
+        </div>
+        <div class="command-grid">
+          <article class="command">
+            <h3>Проверить конфиг</h3>
+            <code>python -m hh_automative check-config</code>
+          </article>
+          <article class="command">
+            <h3>Войти в hh.ru</h3>
+            <code>python -m hh_automative login</code>
+          </article>
+          <article class="command">
+            <h3>Dry-run поиска</h3>
+            <code>python -m hh_automative run --profile data-engineer --limit 10 --dry-run</code>
+          </article>
+          <article class="command">
+            <h3>Сводка событий</h3>
+            <code>python -m hh_automative analytics</code>
+          </article>
+          <article class="command">
+            <h3>Dashboard</h3>
+            <code>python -m hh_automative dashboard --db-path data/hh_automative.duckdb</code>
+          </article>
+          <article class="command">
+            <h3>Все проверки</h3>
+            <code>python -m scripts.check</code>
+          </article>
+        </div>
+      </section>
+
+      <section class="section timeline" id="workflow">
+        <div class="section-heading">
+          <p class="eyebrow">Flow</p>
+          <h2>Как устроен запуск</h2>
+        </div>
+        <div class="steps">
+          <article>
+            <span>1</span>
+            <h3>Загрузка настроек</h3>
+            <p>Читаются `.env`, профиль поиска и карта резюме из `config/`.</p>
+          </article>
+          <article>
+            <span>2</span>
+            <h3>Браузерный сценарий</h3>
+            <p>Selenium открывает hh.ru, собирает вакансии и проходит форму отклика.</p>
+          </article>
+          <article>
+            <span>3</span>
+            <h3>История и дедупликация</h3>
+            <p>SQLite хранит обработанные вакансии, чтобы не повторять один и тот же flow.</p>
+          </article>
+          <article>
+            <span>4</span>
+            <h3>События и отчеты</h3>
+            <p>DuckDB принимает события автоматизации и логи приложения для панели.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section split" id="config">
+        <div>
+          <p class="eyebrow">Configuration</p>
+          <h2>Файлы и переменные</h2>
+          <p>
+            Настройки разделены на локальные секреты, профили поиска, карту резюме и пути к
+            хранилищам. Это позволяет менять поисковые сценарии без правки Python-кода.
+          </p>
+        </div>
+        <div class="matrix">
+          <div><strong>.env</strong><span>секреты, пути, LLM-провайдеры</span></div>
+          <div><strong>config/search_profiles.json</strong><span>профили поиска вакансий</span></div>
+          <div><strong>config/resumes.json</strong><span>resume codes и matching rules</span></div>
+          <div><strong>data/hh_automative.sqlite3</strong><span>история обработанных вакансий</span></div>
+          <div><strong>data/hh_automative.duckdb</strong><span>аналитические события и app logs</span></div>
+          <div><strong>reports/diagnostics</strong><span>HTML и screenshots при ошибках</span></div>
+        </div>
+      </section>
+
+      <section class="section analytics" id="analytics">
+        <div class="section-heading">
+          <p class="eyebrow">Observability</p>
+          <h2>Аналитика и dashboard</h2>
+          <p>
+            Локальная панель показывает результат запусков, причины ошибок, выбранные вакансии,
+            diagnostics paths и записи app logs.
+          </p>
+        </div>
+        <div class="dashboard-preview">
+          <div class="metric"><span>automation_events</span><strong>runs, vacancies, errors</strong></div>
+          <div class="metric"><span>app_logs</span><strong>level, logger, message</strong></div>
+          <div class="metric"><span>dashboard</span><strong>Streamlit over DuckDB</strong></div>
+        </div>
+      </section>
+
+      <section class="section split" id="llm">
+        <div>
+          <p class="eyebrow">AI assist</p>
+          <h2>LLM для писем и опросов</h2>
+          <p>
+            Проект формирует строгие JSON-промпты для сопроводительных писем и анкет работодателя.
+            Поддерживаются Gemini, Mistral, OpenRouter и локальный Ollama.
+          </p>
+        </div>
+        <pre class="code-block"><code>HH_USE_LLM=true
+HH_USE_LLM_COVER_LETTER=true
+HH_USE_LLM_QUESTIONNAIRE=true
+HH_LLM_PROVIDER=gemini
+HH_LLM_FALLBACKS=mistral,openrouter,ollama</code></pre>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>hh-automative</span>
+      <a href="https://github.com/karnaksp/hh-automative">Repository</a>
+    </footer>
+  </body>
+</html>

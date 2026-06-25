@@ -1,0 +1,472 @@
+:root {
+  --bg: #f7f3ea;
+  --ink: #17211b;
+  --muted: #627066;
+  --line: #d9d1c2;
+  --panel: #fffaf0;
+  --panel-strong: #ecf4e6;
+  --red: #c9332f;
+  --green: #2f7254;
+  --blue: #244d70;
+  --gold: #c59435;
+  --shadow: 0 24px 80px rgba(34, 31, 24, 0.14);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at 14% 10%, rgba(201, 51, 47, 0.12), transparent 25rem),
+    radial-gradient(circle at 85% 18%, rgba(47, 114, 84, 0.14), transparent 28rem),
+    linear-gradient(180deg, #fbf7ef 0%, var(--bg) 42%, #eef3e8 100%);
+  color: var(--ink);
+  font-family: Charter, "Iowan Old Style", Georgia, serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+code,
+pre {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+}
+
+.hero {
+  min-height: 92vh;
+  padding: 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 14px 0;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.brand-mark {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border-radius: 8px;
+  background: var(--red);
+  color: white;
+  font-family: Arial, sans-serif;
+  font-weight: 800;
+}
+
+.nav-links {
+  display: flex;
+  gap: 18px;
+  color: var(--muted);
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  font-size: 14px;
+}
+
+.nav-links a:hover {
+  color: var(--ink);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.75fr);
+  align-items: center;
+  gap: 48px;
+  max-width: 1180px;
+  min-height: calc(92vh - 90px);
+  margin: 0 auto;
+  padding: 44px 0 84px;
+}
+
+.eyebrow {
+  margin: 0 0 14px;
+  color: var(--red);
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  max-width: 880px;
+  margin-bottom: 24px;
+  font-size: clamp(44px, 7vw, 86px);
+  line-height: 0.94;
+  letter-spacing: 0;
+}
+
+h2 {
+  margin-bottom: 14px;
+  font-size: clamp(30px, 4vw, 52px);
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+h3 {
+  margin-bottom: 10px;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.lead {
+  max-width: 680px;
+  color: var(--muted);
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  font-size: 19px;
+  line-height: 1.65;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 18px;
+  border: 1px solid var(--ink);
+  border-radius: 8px;
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  font-weight: 800;
+}
+
+.button.primary {
+  background: var(--ink);
+  color: white;
+}
+
+.button.ghost {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.terminal {
+  overflow: hidden;
+  border: 1px solid #2b332d;
+  border-radius: 8px;
+  background: #121711;
+  box-shadow: var(--shadow);
+  color: #dcebd3;
+}
+
+.terminal-bar {
+  display: flex;
+  gap: 7px;
+  padding: 14px;
+  border-bottom: 1px solid #2b332d;
+}
+
+.terminal-bar span {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--gold);
+}
+
+.terminal-bar span:first-child {
+  background: var(--red);
+}
+
+.terminal-bar span:last-child {
+  background: var(--green);
+}
+
+.terminal pre,
+.code-block {
+  overflow-x: auto;
+  margin: 0;
+  padding: 24px;
+  font-size: 14px;
+  line-height: 1.7;
+  white-space: pre;
+}
+
+.section {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 84px 24px;
+}
+
+.intro-band {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  max-width: none;
+  padding: 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--line);
+}
+
+.feature {
+  min-height: 260px;
+  padding: 32px;
+  background: rgba(255, 250, 240, 0.78);
+}
+
+.feature-index {
+  display: block;
+  margin-bottom: 46px;
+  color: var(--green);
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  font-weight: 800;
+}
+
+.feature p,
+.split p,
+.section-heading p,
+.steps p,
+.matrix span {
+  color: var(--muted);
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  line-height: 1.65;
+}
+
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(320px, 1fr);
+  gap: 56px;
+  align-items: start;
+}
+
+.code-block {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #18231d;
+  box-shadow: var(--shadow);
+  color: #eff8e8;
+}
+
+.section-heading {
+  max-width: 760px;
+  margin-bottom: 36px;
+}
+
+.command-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.command {
+  min-height: 170px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 250, 240, 0.72);
+}
+
+.command code {
+  display: block;
+  overflow-wrap: anywhere;
+  color: var(--blue);
+  line-height: 1.55;
+}
+
+.timeline {
+  max-width: none;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: rgba(23, 33, 27, 0.04);
+}
+
+.timeline .section-heading,
+.timeline .steps {
+  max-width: 1180px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.steps article {
+  padding: 22px;
+  border-left: 3px solid var(--red);
+  background: rgba(255, 250, 240, 0.54);
+}
+
+.steps span {
+  display: inline-grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  margin-bottom: 28px;
+  border-radius: 8px;
+  background: var(--green);
+  color: white;
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  font-weight: 800;
+}
+
+.matrix {
+  display: grid;
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--line);
+}
+
+.matrix div {
+  display: grid;
+  grid-template-columns: minmax(170px, 0.8fr) minmax(0, 1fr);
+  gap: 18px;
+  padding: 18px;
+  background: var(--panel);
+}
+
+.matrix strong {
+  overflow-wrap: anywhere;
+}
+
+.analytics {
+  max-width: none;
+  background: #16211b;
+  color: #fbf7ef;
+}
+
+.analytics .section-heading,
+.analytics .dashboard-preview {
+  max-width: 1180px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.analytics .section-heading p {
+  color: #c9d7ca;
+}
+
+.dashboard-preview {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.metric {
+  min-height: 180px;
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02)),
+    #1d2a22;
+}
+
+.metric span {
+  display: block;
+  margin-bottom: 58px;
+  color: #9bbca7;
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+}
+
+.metric strong {
+  display: block;
+  font-size: 24px;
+  line-height: 1.2;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 28px 24px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+}
+
+@media (max-width: 900px) {
+  .topbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+  }
+
+  .hero-grid,
+  .split,
+  .intro-band,
+  .steps,
+  .dashboard-preview,
+  .command-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    min-height: auto;
+  }
+
+  .hero-grid {
+    min-height: auto;
+    padding-bottom: 44px;
+  }
+
+  .feature {
+    min-height: 190px;
+  }
+
+  .matrix div {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}
+
+@media (max-width: 520px) {
+  .hero,
+  .section {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  h1 {
+    font-size: 40px;
+  }
+
+  .lead {
+    font-size: 17px;
+  }
+
+  .terminal pre,
+  .code-block {
+    padding: 18px;
+    font-size: 13px;
+  }
+}
